@@ -113,36 +113,52 @@ class OverlayService : Service() {
 
         windowManager.addView(webView, params)
 
-        // 可拖拽：使用 rawX/rawY 避免瞬移
-        webView.setOnTouchListener { _, event ->
-            val p = webView.layoutParams as WindowManager.LayoutParams
+        // 可拖拽 + 可点击：用位移阈值区分"拖拽"和"戳一下"
+        // 若只是轻点（位移很小），放行给 WebView 内的 JS 处理 click → 触发表情
+        webView.setOnTouchListener { view, event ->
+            val p = view.layoutParams as WindowManager.LayoutParams
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     downRawX = event.rawX
                     downRawY = event.rawY
                     startX = p.x.toFloat()
                     startY = p.y.toFloat()
+                    isDragging = false
+                    // 第一下 always return true，以便捕获后续 MOVE/UP
                     true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    p.x = (startX + (event.rawX - downRawX)).toInt()
-                    p.y = (startY + (event.rawY - downRawY)).toInt()
-                    windowManager.updateViewLayout(webView, p)
+                    val dx = event.rawX - downRawX
+                    val dy = event.rawY - downRawY
+                    // 超过拖动阈值才开始移动窗口
+                    if (Math.abs(dx) > touchSlop || Math.abs(dy) > touchSlop) {
+                        isDragging = true
+                        p.x = (startX + dx).toInt()
+                        p.y = (startY + dy).toInt()
+                        windowManager.updateViewLayout(view, p)
+                    }
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    // 简单点击识别（未移动则视为"戳一下"）
+                    // 若没有发生真正拖动 → 视为"戳一下"，放行给 WebView 处理点击
+                    if (!isDragging) {
+                        view.performClick()  // 触发 WebView 内的 click 事件
+                    }
                     true
                 }
                 else -> false
             }
         }
+        webView.isClickable = true
+        webView.isFocusable = true
     }
 
     private var downRawX = 0f
     private var downRawY = 0f
     private var startX = 0f
     private var startY = 0f
+    private var isDragging = false
+    private val touchSlop = 12  // 像素位移阈值，超过才算拖拽
 
     override fun onDestroy() {
         super.onDestroy()
