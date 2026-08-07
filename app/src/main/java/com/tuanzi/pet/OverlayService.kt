@@ -91,21 +91,21 @@ class OverlayService : Service() {
         val shy = obj.optInt("shy", 0)
         val jealous = obj.optInt("jealousy", 0)
 
-        // 主导情绪判定：最大的那个情绪决定待机表情
+        // 主导情绪判定 → 直接映射成团子的表情 id
         val max = maxOf(joy, anger, sad, worry, shy, jealous)
         val emo = when (max) {
-            joy -> if (joy >= 60) "joy" else "calm"
-            anger -> if (anger >= 30) "anger" else "calm"
-            sad -> if (sad >= 30) "sad" else "calm"
-            worry -> if (worry >= 30) "worry" else "calm"
-            shy -> if (shy >= 30) "shy" else "calm"
-            jealous -> if (jealous >= 30) "jealousy" else "calm"
-            else -> "calm"
+            joy -> if (joy >= 60) "happy" else "idle"
+            anger -> if (anger >= 30) "angry" else "idle"
+            sad -> if (sad >= 30) "sad" else "idle"
+            worry -> if (worry >= 30) "peek" else "idle"
+            shy -> if (shy >= 30) "peek" else "idle"
+            jealous -> if (jealous >= 30) "angry" else "idle"
+            else -> "idle"
         }
 
         if (::webView.isInitialized) {
             webView.post {
-                webView.evaluateJavascript("window.applyMood('$emo');", null)
+                webView.evaluateJavascript("applyMoodEmotion('$emo');", null)
             }
         }
     }
