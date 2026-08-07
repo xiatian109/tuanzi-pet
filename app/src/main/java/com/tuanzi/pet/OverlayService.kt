@@ -140,9 +140,11 @@ class OverlayService : Service() {
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    // 若没有发生真正拖动 → 视为"戳一下"，放行给 WebView 处理点击
+                    // 轻点（没拖动）→ 视为"戳一下"，直接调 JS 表情函数（绕过 WebView click）
                     if (!isDragging) {
-                        view.performClick()  // 触发 WebView 内的 click 事件
+                        webView.post {
+                            webView.evaluateJavascript("onPetTouch();", null)
+                        }
                     }
                     true
                 }
