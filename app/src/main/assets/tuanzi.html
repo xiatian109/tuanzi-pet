@@ -25,7 +25,7 @@
   #bubble {
     position: fixed;
     left: 50%;
-    top: 8%;
+    top: 4%;
     transform: translateX(-50%);
     max-width: 190px;
     background: rgba(255,255,255,0.96);
@@ -58,28 +58,32 @@
     height: 220px;
     cursor: pointer;
   }
-  /* 漂浮动画（只作用于外层容器整个 svg，不干扰内部五官定位） */
+  /* 漂浮动画：只作用于 svg 外层容器，不动内部五官定位 */
   .float-anim {
-    animation: floaty 3.2s ease-in-out infinite;
-    /* 不用 transform 做漂浮，改用 margin-top 避免 transform 影响 SVG 定位 */
-    animation-name: floatyMar;
+    animation: floatyMar 3.2s ease-in-out infinite;
   }
   @keyframes floatyMar {
     0%   { margin-top: 0; }
     50%  { margin-top: -8px; }
     100% { margin-top: 0; }
   }
-  /* 出现过渡：仅用透明度，不用 scale/transform（避免五官瞬间飞/错位） */
-  .fade-in { animation: fadeIn 0.25s ease-out; }
+  /* 表情切换淡入：只动整个 svg 透明度 */
+  .fade-in { animation: fadeIn 0.2s ease-out; }
   @keyframes fadeIn {
-    0% { opacity: 0; }
+    0% { opacity: 0.35; }
     100% { opacity: 1; }
+  }
+  /* 眨眼：只缩放眼睛那一点点垂直比例，不偏移位置 */
+  .eye-blink { animation: eyeblink 4s ease-in-out infinite; transform-origin: center; }
+  @keyframes eyeblink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    94%, 96% { transform: scaleY(0.12); }
   }
 </style>
 </head>
 <body>
 <div class="float-anim" id="floatWrap">
-  <svg id="pet" class="fade-in" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" preserveAspectRatio="xMidYMid meet">
+  <svg id="pet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 260" preserveAspectRatio="xMidYMid meet">
 
     <defs>
       <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
@@ -94,61 +98,58 @@
       </radialGradient>
     </defs>
 
-    <!-- 待机表情（默认显示），其余表情靠 JS 切 display -->
+    <!-- 待机：正常圆眼(cy=132) + 微笑嘴 -->
     <g id="face-idle" class="face">
       <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
       <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-      <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.35"/>
-      <g class="blink">
-        <ellipse cx="98" cy="132" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-        <ellipse cx="142" cy="132" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <g class="eye-blink">
+        <ellipse cx="98" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+        <ellipse cx="142" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+        <circle cx="94" cy="127" r="4" fill="#ffffff"/>
+        <circle cx="138" cy="127" r="4" fill="#ffffff"/>
       </g>
-      <circle cx="94" cy="126" r="4.5" fill="#ffffff"/>
-      <circle cx="138" cy="126" r="4.5" fill="#ffffff"/>
       <ellipse cx="84" cy="150" rx="11" ry="6" fill="#ff9d8a" opacity="0.4"/>
       <ellipse cx="156" cy="150" rx="11" ry="6" fill="#ff9d8a" opacity="0.4"/>
-      <path d="M113 154 Q120 160 127 154" fill="none" stroke="#3c6e94" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M113 154 Q120 159 127 154" fill="none" stroke="#3c6e94" stroke-width="2.5" stroke-linecap="round"/>
       <ellipse cx="48" cy="144" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
       <ellipse cx="192" cy="144" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
     </g>
 
+    <!-- 开心：弯月眼(同基线) + 咧嘴笑 -->
     <g id="face-happy" class="face" style="display:none">
       <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
       <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-      <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.35"/>
-      <path d="M88 132 Q98 122 108 132" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <path d="M132 132 Q142 122 152 132" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <ellipse cx="82" cy="152" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
-      <ellipse cx="158" cy="152" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
+      <path d="M88 134 Q98 120 108 134" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M132 134 Q142 120 152 134" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <ellipse cx="84" cy="150" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
+      <ellipse cx="156" cy="150" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
       <path d="M106 156 Q120 176 134 156 Q120 166 106 156 Z" fill="#3c6e94"/>
       <ellipse cx="120" cy="160" rx="10" ry="6" fill="#f0a6a0"/>
       <ellipse cx="48" cy="138" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(-25 48 138)"/>
       <ellipse cx="192" cy="138" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(25 192 138)"/>
-      <path d="M40 70 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z" fill="#ffd875" opacity="0.8"/>
-      <path d="M200 96 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 Z" fill="#ffd875" opacity="0.7"/>
     </g>
 
+    <!-- 伤心：耷拉眉 + 圆眼(同基线) + 流泪 -->
     <g id="face-sad" class="face" style="display:none">
       <path d="M100 26 Q94 16 102 12 Q110 14 109 22 Q116 18 120 24 Q114 30 106 30 Z" fill="#9aa7b5" opacity="0.8"/>
-      <ellipse cx="120" cy="156" rx="60" ry="18" fill="#74b6e0" opacity="0.08"/>
+      <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.08"/>
       <path d="M70 68 Q62 48 76 36 Q84 50 82 66 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M170 68 Q178 48 164 36 Q156 50 158 66 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
-      <ellipse cx="120" cy="145" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+      <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M80 88 Q90 70 108 74 Q100 60 120 58 Q140 60 132 74 Q150 72 160 88" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-      <ellipse cx="98" cy="106" rx="18" ry="12" fill="#ffffff" opacity="0.3"/>
       <path d="M88 120 Q98 116 108 121" stroke="#2f5a80" stroke-width="3" stroke-linecap="round" fill="none"/>
       <path d="M132 121 Q142 116 152 120" stroke="#2f5a80" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <ellipse cx="98" cy="140" rx="13" ry="11" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-      <ellipse cx="142" cy="140" rx="13" ry="11" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-      <circle cx="94" cy="136" r="3" fill="#ffffff"/>
-      <circle cx="138" cy="136" r="3" fill="#ffffff"/>
-      <ellipse cx="108" cy="156" rx="4" ry="6" fill="#9ed0f5" opacity="0.9"/>
+      <ellipse cx="98" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <ellipse cx="142" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <circle cx="94" cy="127" r="3" fill="#ffffff"/>
+      <circle cx="138" cy="127" r="3" fill="#ffffff"/>
+      <ellipse cx="108" cy="148" rx="4" ry="7" fill="#9ed0f5" opacity="0.9"/>
       <ellipse cx="86" cy="158" rx="11" ry="6" fill="#9a8a9e" opacity="0.3"/>
       <ellipse cx="154" cy="158" rx="11" ry="6" fill="#9a8a9e" opacity="0.3"/>
       <path d="M112 172 Q120 164 128 172" stroke="#3c6e94" stroke-width="3" stroke-linecap="round" fill="none"/>
@@ -157,19 +158,19 @@
       <path d="M196 210 Q204 224 194 234" fill="none" stroke="#aed8f2" stroke-width="4" stroke-linecap="round"/>
     </g>
 
+    <!-- 生气瞪：倒竖眉 + 圆眼瞪大(同基线) -->
     <g id="face-angry" class="face" style="display:none">
       <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
       <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-      <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.3"/>
       <line x1="86" y1="108" x2="104" y2="114" stroke="#2f5a80" stroke-width="3" stroke-linecap="round"/>
       <line x1="154" y1="108" x2="136" y2="114" stroke="#2f5a80" stroke-width="3" stroke-linecap="round"/>
-      <ellipse cx="98" cy="128" rx="15" ry="17" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-      <ellipse cx="142" cy="128" rx="15" ry="17" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-      <circle cx="93" cy="123" r="4" fill="#ffffff"/>
-      <circle cx="137" cy="123" r="4" fill="#ffffff"/>
+      <ellipse cx="98" cy="132" rx="14" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <ellipse cx="142" cy="132" rx="14" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <circle cx="93" cy="127" r="4" fill="#ffffff"/>
+      <circle cx="137" cy="127" r="4" fill="#ffffff"/>
       <circle cx="82" cy="152" r="14" fill="#4a93c7" opacity="0.25"/>
       <circle cx="158" cy="152" r="14" fill="#4a93c7" opacity="0.25"/>
       <ellipse cx="120" cy="160" rx="11" ry="7" fill="#3c6e94"/>
@@ -178,19 +179,19 @@
       <ellipse cx="194" cy="152" rx="14" ry="11" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
     </g>
 
+    <!-- 偷看：双眼都在基线，右眼珠瞟向一边(显得在偷看) -->
     <g id="face-peek" class="face" style="display:none">
       <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
       <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
       <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-      <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.3"/>
-      <ellipse cx="118" cy="130" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
-      <circle cx="114" cy="125" r="3.5" fill="#ffffff"/>
-      <path d="M128 130 Q140 118 152 128" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-      <circle cx="112" cy="130" r="5" fill="#a86b1c" opacity="0.9"/>
-      <ellipse cx="84" cy="152" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
-      <ellipse cx="156" cy="152" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
+      <ellipse cx="98" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <circle cx="94" cy="128" r="4" fill="#ffffff"/>
+      <ellipse cx="142" cy="132" rx="13" ry="14" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+      <circle cx="146" cy="128" r="4" fill="#ffffff"/>
+      <ellipse cx="84" cy="150" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
+      <ellipse cx="156" cy="150" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
       <ellipse cx="120" cy="158" rx="8" ry="6" fill="#3c6e94"/>
       <ellipse cx="70" cy="156" rx="16" ry="12" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(-38 70 156)"/>
       <ellipse cx="170" cy="156" rx="16" ry="12" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(38 170 156)"/>
@@ -199,15 +200,15 @@
       <circle cx="136" cy="34" r="4" fill="#9ac8e6" opacity="0.8"/>
     </g>
 
+    <!-- 困：眯眼(闭,同基线) + 打哈欠 -->
     <g id="face-sleepy" class="face" style="display:none">
-      <ellipse cx="120" cy="156" rx="60" ry="18" fill="#74b6e0" opacity="0.08"/>
+      <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.08"/>
       <path d="M74 66 Q66 46 78 36 Q86 48 84 64 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
       <path d="M166 66 Q174 46 162 36 Q154 48 156 64 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
-      <ellipse cx="120" cy="146" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+      <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
       <path d="M80 88 Q90 70 108 74 Q100 60 120 58 Q140 60 132 74 Q150 72 160 88" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-      <ellipse cx="98" cy="108" rx="18" ry="12" fill="#ffffff" opacity="0.3"/>
-      <path d="M90 132 Q100 142 110 132" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-      <path d="M130 132 Q140 142 150 132" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path d="M90 134 Q100 142 110 134" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path d="M130 134 Q140 142 150 134" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
       <ellipse cx="120" cy="162" rx="14" ry="12" fill="#3c6e94"/>
       <ellipse cx="120" cy="164" rx="10" ry="7" fill="#8a5a4a"/>
       <ellipse cx="86" cy="154" rx="11" ry="6" fill="#c9a8b8" opacity="0.35"/>
@@ -220,6 +221,7 @@
       <path d="M196 210 Q206 226 194 236" fill="none" stroke="#aed8f2" stroke-width="4" stroke-linecap="round"/>
     </g>
 
+    <!-- 背对：后脑勺 + 忧怨小手 -->
     <g id="face-turn" class="face" style="display:none">
       <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
       <path d="M85 70 Q80 52 92 40 Q100 52 96 68 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
