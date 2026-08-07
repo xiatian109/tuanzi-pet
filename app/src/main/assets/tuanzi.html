@@ -250,6 +250,23 @@
   var current = 'idle';
   var idleTimer = null;
   var lastTouchTime = Date.now();
+  // 心情联动：从 mood_state.json 映射来的"待机脸"（默认待机）。团子不被人戳时保持这个表情
+  var moodFace = 'idle';
+
+  // Kotlin 侧调用：根据你的心情切换待机表情
+  // emo: 'joy' | 'anger' | 'sad' | 'worry' | 'shy' | 'jealousy' | 'calm'
+  window.applyMood = function (emo) {
+    var map = { joy: 'happy', anger: 'angry', sad: 'sad', worry: 'peek', shy: 'peek', jealousy: 'peek', calm: 'idle' };
+    moodFace = map[emo] || 'idle';
+    // 只在待机时直接换上，避免打断你正在戳它的互动
+    if (current === 'idle') {
+      showFace(moodFace);
+      // 心情脸停留久一点，别马上被随机点缀盖掉
+      clearTimeout(_moodHold);
+      _moodHold = setTimeout(function () { if (current === moodFace) showFace('idle'); }, 6000);
+    }
+  };
+  var _moodHold = null;
 
   function showFace(name) {
     if (name === current) { quickResetIdle(); return; }
@@ -325,6 +342,18 @@
   }, 9000);
 
   document.getElementById('pet').addEventListener('click', onPetTouch);
+
+  // 供 Kotlin 侧调用：根据情绪面板的主导情绪切换待机表情（仅在空闲时生效，不打断用户交互）
+  function applyMoodEmotion(emotion) {
+    if (current !== 'idle') return;             // 正在被戳/在别的表情里，不抢
+    // 只接受团子拥有的表情 id
+    var allowed = ['happy', 'angry', 'sad', 'peek', 'sleepy', 'idle'];
+    if (allowed.indexOf(emotion) === -1) return;
+    if (emotion === 'idle') { showFace('idle'); return; }
+    // 心情脸停留久一点再回待机（但偷偷摸摸那种就多待会儿）
+    showFace(emotion);
+    setTimeout(function () { if (current === emotion) showFace('idle'); }, 6000);
+  }
 
   quickResetIdle();
 </script>
