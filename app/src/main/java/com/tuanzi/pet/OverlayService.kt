@@ -87,8 +87,6 @@ class OverlayService : Service() {
                 javaScriptEnabled = true
                 allowFileAccess = true
                 domStorageEnabled = true
-                @Suppress("DEPRECATION")
-                setAppCacheEnabled(true)
             }
             webViewClient = WebViewClient()
 
