@@ -17,6 +17,10 @@ import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
+import android.os.Handler
+import android.os.Looper
+import org.json.JSONObject
+import java.io.File
 
 /**
  * 团子精灵悬浮窗前台服务。
@@ -47,9 +51,63 @@ class OverlayService : Service() {
 
         if (!::webView.isInitialized) {
             addPetToWindow()
+            startMoodWatcher()
         }
 
         return START_STICKY
+    }
+
+    // 心情联动：定时读 /sdcard/Download/mood_state.json，把主导情绪告诉前端 JS 切表情
+    private val moodHandler = Handler(Looper.getMainLooper())
+    private val moodRunnable = object : Runnable {
+        override fun run() {
+            try {
+                applyMoodFromFile()
+            } catch (_: Exception) {
+            }
+            moodHandler.postDelayed(this, 8000L) // 每 8 秒轮询一次
+        }
+    }
+
+    private fun startMoodWatcher() {
+        moodHandler.removeCallbacks(moodRunnable)
+        moodHandler.postDelayed(moodRunnable, 3000L) // 等 WebView 加载完再开始
+    }
+
+    private fun stopMoodWatcher() {
+        moodHandler.removeCallbacks(moodRunnable)
+    }
+
+    private fun applyMoodFromFile() {
+        val f = File("/sdcard/Download/mood_state.json")
+        if (!f.exists()) return
+        val text = f.readText().trim()
+        if (text.isEmpty()) return
+        val obj = JSONObject(text)
+        val joy = obj.optInt("joy", 0)
+        val anger = obj.optInt("anger", 0)
+        val sad = obj.optInt("sad", 0)
+        val worry = obj.optInt("worry", 0)
+        val shy = obj.optInt("shy", 0)
+        val jealous = obj.optInt("jealousy", 0)
+
+        // 主导情绪判定：最大的那个情绪决定待机表情
+        val max = maxOf(joy, anger, sad, worry, shy, jealous)
+        val emo = when (max) {
+            joy -> if (joy >= 60) "joy" else "calm"
+            anger -> if (anger >= 30) "anger" else "calm"
+            sad -> if (sad >= 30) "sad" else "calm"
+            worry -> if (worry >= 30) "worry" else "calm"
+            shy -> if (shy >= 30) "shy" else "calm"
+            jealous -> if (jealous >= 30) "jealousy" else "calm"
+            else -> "calm"
+        }
+
+        if (::webView.isInitialized) {
+            webView.post {
+                webView.evaluateJavascript("window.applyMood('$emo');", null)
+            }
+        }
     }
 
     private fun startForegroundWithNotification() {
@@ -164,6 +222,7 @@ class OverlayService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        stopMoodWatcher()
         if (::webView.isInitialized) {
             try {
                 windowManager.removeView(webView)
