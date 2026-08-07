@@ -15,6 +15,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 触感反馈 -->
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 读取情绪数据 mood_state.json（Android 12 及以下） -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <!-- Android 13+ 读取共享存储，用"所有文件访问"（跨 app 读非媒体文件如 mood_state.json 唯一可行路径） -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
