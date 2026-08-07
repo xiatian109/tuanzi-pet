@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
+
+  <!-- 小角 -->
+  <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+  <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体 -->
+  <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 软fufu顶 -->
+  <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.3"/>
+
+  <!-- 偷看：一只眼睛正常、一只从旁边偷偷瞟过来 -->
+  <ellipse cx="118" cy="130" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+  <circle cx="114" cy="125" r="3.5" fill="#ffffff"/>
+
+  <!-- 右边偷看的"眯"眼（从角度看过来） -->
+  <path d="M128 130 Q140 118 152 128" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <!-- 偷看的瞳孔焦点偏移，往左边（看向用户方向） -->
+  <circle cx="112" cy="130" r="5" fill="#a86b1c" opacity="0.9"/>
+
+  <!-- 偷看的害羞腮红（明显一点） -->
+  <ellipse cx="84" cy="152" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
+  <ellipse cx="156" cy="152" rx="12" ry="7" fill="#ff9d8a" opacity="0.5"/>
+
+  <!-- 偷看的小慌张嘴（微张） -->
+  <ellipse cx="120" cy="158" rx="8" ry="6" fill="#3c6e94"/>
+
+  <!-- 两手交叠在身前（偷看时手足无措的小手） -->
+  <ellipse cx="70" cy="156" rx="16" ry="12" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(-38 70 156)"/>
+  <ellipse cx="170" cy="156" rx="16" ry="12" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(38 170 156)"/>
+
+  <!-- 头顶小省略号（偷偷观察的心虚感） -->
+  <circle cx="104" cy="34" r="4" fill="#9ac8e6" opacity="0.8"/>
+  <circle cx="120" cy="30" r="4" fill="#9ac8e6" opacity="0.6"/>
+  <circle cx="136" cy="34" r="4" fill="#9ac8e6" opacity="0.8"/>
+
+  <!-- 尾巴轻轻勾起 -->
+  <path d="M194 200 Q212 194 208 214 Q204 226 190 222" fill="#aed8f2" stroke="#6fb0dc" stroke-width="2"/>
+</svg>

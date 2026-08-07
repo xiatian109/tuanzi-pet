@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <!-- 湖蓝主体渐变 -->
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <!-- 琥珀眼渐变 -->
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+    <!-- 腮红 -->
+    <radialGradient id="blushGrad">
+      <stop offset="0%" stop-color="#ff9d8a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff9d8a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 光晕（仙气漂浮感） -->
+  <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
+  <ellipse cx="120" cy="156" rx="42" ry="12" fill="#74b6e0" opacity="0.08"/>
+
+  <!-- 头顶两个尖尖小角 -->
+  <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+  <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体圆团子 -->
+  <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 团子顶部一团软fufu蓬松感 -->
+  <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 高光（软萌感） -->
+  <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.35"/>
+
+  <!-- 眼睛（琥珀黄，亮晶晶） -->
+  <ellipse cx="98" cy="132" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+  <ellipse cx="142" cy="132" rx="13" ry="15" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+  <!-- 眼睛高光 -->
+  <circle cx="94" cy="126" r="4.5" fill="#ffffff"/>
+  <circle cx="138" cy="126" r="4.5" fill="#ffffff"/>
+  <circle cx="102" cy="138" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="146" cy="138" r="2" fill="#ffffff" opacity="0.7"/>
+
+  <!-- 腮红 -->
+  <ellipse cx="84" cy="150" rx="11" ry="6" fill="url(#blushGrad)"/>
+  <ellipse cx="156" cy="150" rx="11" ry="6" fill="url(#blushGrad)"/>
+
+  <!-- 嘴（待机：抿着一个小点） -->
+  <path d="M113 154 Q120 160 127 154" fill="none" stroke="#3c6e94" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- 两侧短短的手（软fufu小短手） -->
+  <ellipse cx="48" cy="144" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
+  <ellipse cx="192" cy="144" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
+
+  <!-- 飘浮的小尾巴（仙气小尾巴） -->
+  <path d="M196 196 Q214 200 208 218 Q202 230 192 224" fill="#aed8f2" stroke="#6fb0dc" stroke-width="2"/>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="156" rx="60" ry="18" fill="#74b6e0" opacity="0.08"/>
+
+  <!-- 小角（微耷） -->
+  <path d="M74 66 Q66 46 78 36 Q86 48 84 64 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
+  <path d="M166 66 Q174 46 162 36 Q154 48 156 64 Z" fill="#c9ddee" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体（困到身体微微下沉） -->
+  <ellipse cx="120" cy="146" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 软fufu顶 -->
+  <path d="M80 88 Q90 70 108 74 Q100 60 120 58 Q140 60 132 74 Q150 72 160 88" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <ellipse cx="98" cy="108" rx="18" ry="12" fill="#ffffff" opacity="0.3"/>
+
+  <!-- 困：眼睛半闭成两条缝 -->
+  <path d="M90 132 Q100 142 110 132" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M130 132 Q140 142 150 132" stroke="#a86b1c" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- 困：打哈欠的大嘴 -->
+  <ellipse cx="120" cy="162" rx="14" ry="12" fill="#3c6e94"/>
+  <ellipse cx="120" cy="164" rx="10" ry="7" fill="#8a5a4a"/>
+
+  <!-- 困：肿眼泡下的淡淡垂腮红 -->
+  <ellipse cx="86" cy="154" rx="11" ry="6" fill="#c9a8b8" opacity="0.35"/>
+  <ellipse cx="154" cy="154" rx="11" ry="6" fill="#c9a8b8" opacity="0.35"/>
+
+  <!-- 困：头顶一个小 Zzz -->
+  <g fill="#74b6e0" opacity="0.85">
+    <path d="M112 26 l12 0 l-12 10 l12 0"/>
+    <path d="M128 18 l9 0 l-9 7.5 l9 0"/>
+    <path d="M140 10 l6 0 l-6 5 l6 0"/>
+  </g>
+
+  <!-- 手揉眼睛（一只举起） -->
+  <ellipse cx="52" cy="140" rx="13" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(-12 52 140)"/>
+  <ellipse cx="188" cy="140" rx="13" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(12 188 140)"/>
+
+  <!-- 尾巴也困得垂下 -->
+  <path d="M196 210 Q206 226 194 236" fill="none" stroke="#aed8f2" stroke-width="4" stroke-linecap="round"/>
+</svg>

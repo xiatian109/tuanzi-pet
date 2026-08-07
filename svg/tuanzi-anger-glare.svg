@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 背景光晕 -->
+  <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
+
+  <!-- 小角 -->
+  <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+  <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体 -->
+  <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 软fufu蓬松顶 -->
+  <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 高光 -->
+  <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.3"/>
+
+  <!-- 瞪眼：眼睛瞪大（比平时大一圈）+ 眉毛倒竖 -->
+  <g stroke="#2f5a80" stroke-width="3" stroke-linecap="round">
+    <!-- 倒竖的眉毛（生气） -->
+    <line x1="86" y1="108" x2="104" y2="114"/>
+    <line x1="154" y1="108" x2="136" y2="114"/>
+  </g>
+  <ellipse cx="98" cy="128" rx="15" ry="17" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+  <ellipse cx="142" cy="128" rx="15" ry="17" fill="url(#eyeGrad)" stroke="#a86b1c" stroke-width="2"/>
+  <!-- 瞪眼瞳孔高光 -->
+  <circle cx="93" cy="123" r="4" fill="#ffffff"/>
+  <circle cx="137" cy="123" r="4" fill="#ffffff"/>
+
+  <!-- 气鼓鼓的腮帮子（鼓起来的圆） -->
+  <circle cx="82" cy="152" r="14" fill="#4a93c7" opacity="0.25"/>
+  <circle cx="158" cy="152" r="14" fill="#4a93c7" opacity="0.25"/>
+
+  <!-- 撅起的嘴（不满意） -->
+  <ellipse cx="120" cy="160" rx="11" ry="7" fill="#3c6e94"/>
+  <path d="M114 160 Q120 165 126 160" fill="none" stroke="#2f5a80" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 叉腰的小短手（生气抱胸姿势） -->
+  <ellipse cx="46" cy="152" rx="14" ry="11" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
+  <ellipse cx="194" cy="152" rx="14" ry="11" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2"/>
+  <line x1="52" y1="140" x2="44" y2="164" stroke="#6fb0dc" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 小尾巴气得翘起来 -->
+  <path d="M196 196 Q216 192 210 216 Q206 228 192 224" fill="#aed8f2" stroke="#6fb0dc" stroke-width="2"/>
+</svg>

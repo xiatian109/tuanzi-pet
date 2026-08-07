@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 背景光晕 -->
+  <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
+
+  <!-- 小角（背对时微微可见） -->
+  <path d="M85 70 Q80 52 92 40 Q100 52 96 68 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体（背对，看到的是团子后脑勺圆弧） -->
+  <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 背对：侧面露出的耳朵/角轮廓，营造"背过身"感 -->
+  <path d="M88 78 Q72 64 78 44 Q90 56 92 70 Z" fill="#bcdcf1" stroke="#8fc2e4" stroke-width="2" opacity="0.9"/>
+
+  <!-- 头顶软fufu（从后面看） -->
+  <path d="M78 82 Q88 62 108 66 Q100 50 120 48 Q140 50 132 66 Q152 62 162 82" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 高光 -->
+  <ellipse cx="96" cy="100" rx="18" ry="12" fill="#ffffff" opacity="0.3"/>
+
+  <!-- 背对的"背影"细节：看不到眼睛，但能看到一圈气鼓鼓的腮 → 表达气嘟嘟 -->
+  <ellipse cx="118" cy="138" rx="30" ry="24" fill="#4a93c7" opacity="0.12"/>
+
+  <!-- 后背上的小颤动线（气到发抖的感觉） -->
+  <path d="M100 120 l6 4 l-6 4" stroke="#6fb0dc" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M140 120 l6 4 l-6 4" stroke="#6fb0dc" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+  <!-- 一只手叉腰（背对时扭过头叉腰的气鼓鼓） -->
+  <ellipse cx="52" cy="150" rx="15" ry="11" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(20 52 150)"/>
+
+  <!-- 几条"气鼓鼓"头顶冒烟的斜线 -->
+  <path d="M108 30 l-4 -10" stroke="#9ac8e6" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M120 24 l0 -12" stroke="#9ac8e6" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M132 30 l4 -10" stroke="#9ac8e6" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 尾巴也气到翘起来 -->
+  <path d="M196 196 Q218 190 212 214 Q208 226 194 222" fill="#aed8f2" stroke="#6fb0dc" stroke-width="2"/>
+</svg>

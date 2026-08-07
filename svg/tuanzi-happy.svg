@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="260" viewBox="0 0 240 260">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#aed8f2"/>
+      <stop offset="55%" stop-color="#74b6e0"/>
+      <stop offset="100%" stop-color="#4a93c7"/>
+    </radialGradient>
+    <radialGradient id="eyeGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd875"/>
+      <stop offset="60%" stop-color="#f0a63a"/>
+      <stop offset="100%" stop-color="#d98a24"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="150" rx="60" ry="18" fill="#74b6e0" opacity="0.10"/>
+
+  <!-- 小角 -->
+  <path d="M70 62 Q62 40 76 28 Q86 42 82 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+  <path d="M170 62 Q178 40 164 28 Q154 42 158 60 Z" fill="#d9edfa" stroke="#8fc2e4" stroke-width="2"/>
+
+  <!-- 主体 -->
+  <ellipse cx="120" cy="135" rx="72" ry="76" fill="url(#bodyGrad)" stroke="#6fb0dc" stroke-width="2.5"/>
+
+  <!-- 软fufu顶 -->
+  <path d="M78 78 Q88 60 108 64 Q100 48 120 46 Q140 48 132 64 Q152 60 162 78" fill="none" stroke="#c9e6f7" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <ellipse cx="96" cy="98" rx="20" ry="14" fill="#ffffff" opacity="0.35"/>
+
+  <!-- 开心：眼睛弯成月牙（用弧线代替圆眼） -->
+  <path d="M88 132 Q98 122 108 132" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M132 132 Q142 122 152 132" stroke="#a86b1c" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- 开心腮红（更明显） -->
+  <ellipse cx="82" cy="152" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
+  <ellipse cx="158" cy="152" rx="13" ry="7" fill="#ff9d8a" opacity="0.5"/>
+
+  <!-- 开心咧嘴笑（露出小舌头） -->
+  <path d="M106 156 Q120 176 134 156 Q120 166 106 156 Z" fill="#3c6e94"/>
+  <ellipse cx="120" cy="160" rx="10" ry="6" fill="#f0a6a0"/>
+
+  <!-- 小短手举起来（欢呼） -->
+  <ellipse cx="48" cy="138" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(-25 48 138)"/>
+  <ellipse cx="192" cy="138" rx="14" ry="10" fill="#8fc2e4" stroke="#6fb0dc" stroke-width="2" transform="rotate(25 192 138)"/>
+
+  <!-- 小星星/闪光（开心氛围） -->
+  <path d="M40 70 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 Z" fill="#ffd875" opacity="0.8"/>
+  <path d="M200 96 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 Z" fill="#ffd875" opacity="0.7"/>
+
+  <!-- 尾巴兴奋摇动 -->
+  <path d="M194 200 Q214 196 210 216 Q206 228 190 224" fill="#aed8f2" stroke="#6fb0dc" stroke-width="2"/>
+</svg>
